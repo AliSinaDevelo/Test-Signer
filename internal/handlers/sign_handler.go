@@ -20,7 +20,7 @@ func NewSignHandler(db *sql.DB) *SignHandler {
 func (h *SignHandler) Sign(w http.ResponseWriter, r *http.Request) {
 	var requestData struct {
 		Username string `json:"username"`
-		Answer  []QuestionAnswer `json:"answer"`
+		Answer  []model.QuestionAnswer `json:"answer"`
 	}
 
 	err := json.NewDecoder(r.Body).Decode(&requestData)
