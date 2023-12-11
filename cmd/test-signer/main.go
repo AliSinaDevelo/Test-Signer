@@ -35,7 +35,7 @@ func main() {
 	verifyHandler := handlers.NewVerifyHandler(db)
 
 	router.HandleFunc("/sign", signHandler.Sign).Methods("POST")
-	router.HandleFunc("/verify", verifyHandler.Verify).Methods("POST")
+	router.HandleFunc("/verify", verifyHandler.Verify).Methods("GET")
 
 	port := ":8080"
 	fmt.Printf("Listening on port %s\n", port)
