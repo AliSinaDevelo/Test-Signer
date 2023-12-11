@@ -22,7 +22,7 @@ func (vh *VerifyHandler) Verify(w http.ResponseWriter, r *http.Request) {
 	signature := r.URL.Query().Get("signature")
 
 	var fetchedSig model.Signature
-	row := vh.DB.QueryRow("SELECT signature FROM signatures WHERE username = $1 AND signaturee = $2 ", user, signature)
+	row := vh.DB.QueryRow("SELECT user_id, signature, answers, timestamp FROM signatures WHERE user_id = $1 AND signature = $2", user, signature)
 	err := row.Scan(&fetchedSig.User, &fetchedSig.Signature, &fetchedSig.Answers, &fetchedSig.Timestamp)
 	if err != nil {
 		http.Error(w, "Invalid signature opr user", http.StatusBadRequest)
