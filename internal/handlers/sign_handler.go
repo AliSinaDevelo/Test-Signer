@@ -5,12 +5,12 @@ import (
 	"encoding/json"
 	"net/http"
 	"time"
-
+	"github.com/AliSinaDevelo/Test-Signer/internal/model"
 	"github.com/dgrijalva/jwt-go"
 )
 
 type SignHandler struct {
-	db *sql.DB
+	DB *sql.DB
 }
 
 func NewSignHandler(db *sql.DB) *SignHandler {
@@ -43,7 +43,7 @@ func (h *SignHandler) Sign(w http.ResponseWriter, r *http.Request) {
 
 	// save token to database
 
-	_, err = sh.DB.Exec("INSERT INTO sig (user_id, signature, answer, timestamp) VALUES ($1, $2, $3, $4)", requestData.Username, tokenString, requestData.Answer, time.Now())
+	_, err = h.DB.Exec("INSERT INTO sig (user_id, signature, answer, timestamp) VALUES ($1, $2, $3, $4)", requestData.Username, tokenString, requestData.Answer, time.Now())
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
