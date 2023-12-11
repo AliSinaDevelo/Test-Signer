@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"time"
 	"github.com/AliSinaDevelo/Test-Signer/internal/model"
+	"fmt"
 )
 
 type VerifyHandler struct {
@@ -25,6 +26,7 @@ func (vh *VerifyHandler) Verify(w http.ResponseWriter, r *http.Request) {
 	row := vh.DB.QueryRow("SELECT user_id, signature, answers, timestamp FROM signatures WHERE user_id = $1 AND signature = $2", user, signature)
 	err := row.Scan(&fetchedSig.User, &fetchedSig.Signature, &fetchedSig.Answers, &fetchedSig.Timestamp)
 	if err != nil {
+		fmt.Printf("Error retrieving signature from the database: %s\n", err)
 		http.Error(w, "Invalid signature or user", http.StatusBadRequest)
 		return
 	}
