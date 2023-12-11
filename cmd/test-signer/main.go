@@ -1,7 +1,7 @@
 package main
 
 import (
-	"database/sql"
+	
 	"fmt"
 	"log"
 	"net/http"
@@ -31,8 +31,8 @@ func main() {
 	router := mux.NewRouter()
 
 	// Handlers for signing and verifying
-	signHandler := handler.NewSignHandler(db)
-	verifyHandler := handler.NewVerifyHandler(db)
+	signHandler := handlers.NewSignHandler(db)
+	verifyHandler := handlers.NewVerifyHandler(db)
 
 	router.HandleFunc("/sign", signHandler.Sign).Methods("POST")
 	router.HandleFunc("/verify", verifyHandler.Verify).Methods("POST")
