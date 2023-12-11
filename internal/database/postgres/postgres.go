@@ -20,3 +20,5 @@ func NewDB(host, port, user, password, dbName string) *sql.DB {
 	fmt.Println("Successfully connected!")
 	return db, nil
 }
+
+// TODO: add database operationss here
