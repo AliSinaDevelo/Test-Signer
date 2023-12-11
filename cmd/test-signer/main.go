@@ -5,23 +5,26 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
 	"github.com/AliSinaDevelo/Test-Signer/internal/database/postgres"
 	"github.com/AliSinaDevelo/Test-Signer/internal/handlers"
+	"github.com/AliSinaDevelo/Test-Signer/config"
+	"github.com/joho/godotenv"
 )
 
 func main() {
-	dbHost := os.Getenv("DB_HOST")
-	dbPort := os.Getenv("DB_PORT")
-	dbUser := os.Getenv("DB_USER")
-	dbPassword := os.Getenv("DB_PASSWORD")
-	dbName := os.Getenv("DB_NAME")
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+	
+	appConfig := config.LoadConfig()
+
 
 	// initialize database connection
-	db, err := postgres.NewDB(dbHost, dbPort, dbUser, dbPassword, dbName)
+	db, err := postgres.NewDB(appConfig.DBHost, appConfig.DBPort, appConfig.DBUser, appConfig.DBPassword, appConfig.DBName)
 	if err != nil {
 		log.Fatal(err)
 	}
