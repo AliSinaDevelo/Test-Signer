@@ -43,7 +43,7 @@ func (h *SignHandler) Sign(w http.ResponseWriter, r *http.Request) {
 
 	// save token to database
 
-	_, err = h.DB.Exec("INSERT INTO sig (user_id, signature, answer, timestamp) VALUES ($1, $2, $3, $4)", requestData.Username, tokenString, requestData.Answer, time.Now())
+	_, err = h.DB.Exec("INSERT INTO signatures (user_id, signature, answer, timestamp) VALUES ($1, $2, $3, $4)", requestData.Username, tokenString, requestData.Answer, time.Now())
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
