@@ -9,8 +9,8 @@ import (
 
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
-	"internal/database/postgres"
-	"internal/handler"
+	"github.com/AliSinaDevelo/Test-Signer/internal/database/postgres"
+	"github.com/AliSinaDevelo/Test-Signer/internal/handlers"
 )
 
 func main() {

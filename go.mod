@@ -1,4 +1,4 @@
-module AliSinaDevelo
+module github.com/AliSinaDevelo/Test-Signer
 
 go 1.18
 

@@ -3,7 +3,7 @@ package postgres
 import (
 	"database/sql"
 	"fmt"
-	"log"
+	
 )
 
 func NewDB(host, port, user, password, dbName string) *sql.DB {
