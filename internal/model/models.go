@@ -7,3 +7,9 @@ type QuestionAnswer struct {
 	Answer   string `json:"answer"`
 }
 
+type Signature struct {
+	User      string           `json:"user"`
+	Signature string           `json:"signature"`
+	Answers   []QuestionAnswer `json:"answers"`
+	Timestamp time.Time        `json:"timestamp"`
+}
