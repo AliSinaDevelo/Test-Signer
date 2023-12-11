@@ -6,7 +6,7 @@ import (
 	
 )
 
-func NewDB(host, port, user, password, dbName string) *sql.DB {
+func NewDB(host, port, user, password, dbName string) (*sql.DB, error) {
 	dbinfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbName)
 	db, err := sql.Open("postgres", dbinfo)
 	if err != nil {
