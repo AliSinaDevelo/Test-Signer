@@ -41,9 +41,14 @@ func (h *SignHandler) Sign(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
+	answersJSON, err := json.Marshal(requestData.Answer)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 	// save token to database
 
-	_, err = h.DB.Exec("INSERT INTO signatures (user_id, signature, answer, timestamp) VALUES ($1, $2, $3, $4)", requestData.Username, tokenString, requestData.Answer, time.Now())
+	_, err = h.DB.Exec("INSERT INTO signatures (user_id, signature, answers, timestamp) VALUES ($1, $2, $3, $4)", requestData.Username, tokenString, string(answersJSON), time.Now())
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
